@@ -59,6 +59,19 @@ public class AdminDashboard extends JFrame
             new AddFlightForm(this).setVisible(true);
         });
 
+        editBtn.addActionListener(e ->
+        {
+            int selectedRow = flightTable.getSelectedRow();
+            if (selectedRow == -1)
+            {
+                JOptionPane.showMessageDialog(this, "please select a flight to edit.");
+                return;
+            }
+
+            int flightId = (int) tableModel.getValueAt(selectedRow, 0);
+            new EditFlightForm(flightId, AdminDashboard.this).setVisible(true);
+        });
+
         deleteBtn.addActionListener(e -> deleteSelectedFlight());
 
         viewBookingsBtn.addActionListener(e ->
